@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  postgres_MuhammadJalallullail:
+    image: postgres:15
+    container_name: postgres_MuhammadJalallullail
+    env_file: .env
+    ports:
+      - "22025:5432"  
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - postgres_network
+
+  pgadmin_MuhammadJalallullail:
+    image: dpage/pgadmin4
+    container_name: pgadmin_MuhammadJalallullail
+    env_file: .env
+    ports:
+      - "44025:80"
+    depends_on:
+      - postgres_MuhammadJalallullail
+    networks:
+      - postgres_network
+
+volumes:
+  postgres_data:
+
+networks:
+  postgres_network:
+    driver: bridge
